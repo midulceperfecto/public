@@ -52,14 +52,15 @@
 			$("#myInput").on("keyup", function() {
 				var value = $(this).val().toLowerCase();
 				$('#products').empty();
-				//console.log(value);
 				loadData(value);
 			});
-			$(".linkTags").on("onclick", function() {
+			$(".linkTags").click(function() {
 				var value = $(this).data('valor');
 				$("#myInput").val(value);
+				console.log(value);
 				$('#products').empty();
 				loadData(value);
+   				event.preventDefault();
 			});
 
 		});
