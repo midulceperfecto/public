@@ -97,6 +97,7 @@
 			  img.attr("class", "img-responsive");
 			  img.attr("style", "width:100%;");
 			  img.attr("alt", product.nom);
+			  img.attr("title", product.descripcion);
 			//var precio = $("<p></p>").html('<b>Precio: </b>' + product.sale );
 			var precio = $("<p></p>");
 			var btnComprar = $("<button></button>").html("Consultar");
@@ -136,7 +137,7 @@
 </nav>
 
 <div class="container-fluid bg-3 text-center">    
-  <h3>Mi Dulce Perfecto</h3><br>
+  <img src="img/logo.png">
   <input id="myInput" type="text" placeholder="Buscar..">
   <br> <br>
   <div id="products" class="row">
