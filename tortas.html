@@ -55,15 +55,22 @@
 				//console.log(value);
 				loadData(value);
 			});
+			$(".linkTags").on("onclick", function() {
+				var value = $(this).data('valor');
+				$("#myInput").val(value);
+				$('#products').empty();
+				loadData(value);
+			});
 
 		});
 
 		var loadData = (function (filter){
+			filter = filter.toLowerCase();
 			$.getJSON(urlJSON).done( function(response) {
 				if(filter != '')
 				{
-					response = $.grep(response, function (element, index) {
-					    return element.tags.includes(filter);
+				    response = $.grep(response, function (element, index) {
+					    return element.tags.toLowerCase().includes(filter);
 					});
 				}
 				response = response.sort(function (a, b) {
@@ -137,10 +144,14 @@
 </nav>
 
 <div class="container-fluid bg-3 text-center">    
-  <img src="img/logo.png" class="img-responsive"> <br> <br>
+  <img src="img/logo_opt.jpg" class="img-responsive text-justify"> <br> <br>
   <input id="myInput" type="text" placeholder="Buscar..">
+  <a href="#" data-valor="infantil" class="badge badge-primary linkTags">#infantil</a>&nbsp;&nbsp;
+  <a href="#" data-valor="keke" class="badge badge-secondary linkTags">#keke</a>&nbsp;&nbsp;
+  <a href="#" data-valor="mujer" class="badge badge-secondary linkTags">#mujer</a>&nbsp;&nbsp;
+  <a href="#" data-valor="hombre" class="badge badge-secondary linkTags">#hombre</a>&nbsp;&nbsp;
   <br> <br>
-  <div id="products" class="row">
+  <div id="products" class="row ">
     
   </div>
 </div><br>
