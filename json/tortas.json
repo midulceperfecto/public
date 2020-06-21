@@ -14,7 +14,7 @@
         "sale": 0,
         "part": -1,
         "img": "1002.jpg",
-        "tags": "granizado,keke",
+        "tags": "inicio,granizado,keke",
         "fav": "0"
     },
     {
@@ -50,7 +50,7 @@
         "sale": 0,
         "part": -1,
         "img": "1006.jpg",
-        "tags": "mujer,mama,arbol,perlas,cumpleaños,fondan",
+        "tags": "inicio,mujer,mama,arbol,perlas,cumpleaños,fondan",
         "fav": "1"
     },
     {
@@ -68,7 +68,7 @@
         "sale": 0,
         "part": -1,
         "img": "1008.jpg",
-        "tags": "super,nintento,fondan,jostick,mando,cumpleaños",
+        "tags": "inicio,super,nintento,fondan,jostick,mando,cumpleaños",
         "fav": "1"
     },
     {
@@ -77,7 +77,7 @@
         "sale": 0,
         "part": -1,
         "img": "1009.jpg",
-        "tags": "camisa,cumpleaños,hombre,fondan",
+        "tags": "inicio,camisa,cumpleaños,hombre,fondan",
         "fav": "1"
     },
     {
