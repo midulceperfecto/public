@@ -108,7 +108,7 @@
 			  var index = $(this).data('index');
 			  var nombre = $(this).data('nombre');
 			  var img = $(this).data('img');
-			  window.open(urlWhatsApp + 'Deseo el producto ' + nombre + ' [ ' + window.location.pathname + 'img/' + img + ']');
+			  window.open(urlWhatsApp + 'Deseo el producto ' + nombre + ' [ ' + window.location.origin + '/img/' + img + ']');
 			});
 
 			item.append(info, img, precio, btnComprar, $("<br>"), $("<br>"));
