@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Mi dulce perfecto</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<style>
+		/* Remove the navbar's default margin-bottom and rounded borders */ 
+		.navbar {
+		  margin-bottom: 0;
+		  border-radius: 0;
+		}
+
+		/* Add a gray background color and some padding to the footer */
+		footer {
+		  background-color: #f2f2f2;
+		  padding: 25px;
+		}
+
+		.whatsapp {
+		  position:fixed;
+		  width:60px;
+		  height:60px;
+		  bottom:40px;
+		  right:40px;
+		  background-color:#25d366;
+		  color:#FFF;
+		  border-radius:50px;
+		  text-align:center;
+		  font-size:30px;
+		  z-index:100;
+		}
+
+		.whatsapp-icon {
+		  margin-top:13px;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		var urlJSON = 'json/tortas.json';
+		var urlWhatsApp = 'https://wa.me/51956235897?text='
+
+		$(document).ready(function () {
+			
+			loadData('');
+
+			$("#myInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$('#products').empty();
+				console.log(value);
+				loadData(value);
+			});
+
+		});
+
+		var loadData = (function (filter){
+			$.getJSON(urlJSON).done( function(response) {
+				if(filter != '')
+				{
+					response = $.grep(response, function (element, index) {
+					    return element.tags.includes(filter);
+					});
+				}
+				response = response.sort(function (a, b) {
+    				if (a.fav < b.fav) {
+      					return 1;
+      				}
+    				if (a.fav > b.fav) {
+     					 return -1;
+     				}
+
+    				return 0;
+			   });
+				$.each(response, function(index, product) {
+					drawSection(index, product);
+				});
+		  	}).fail(function( jqxhr, textStatus, error ) {
+				    var err = textStatus + ", " + error;
+				    console.log( "Request Failed: " + err );
+			});
+		});
+
+		var drawSection = (function (index, product){
+
+			var id = "product_" + index;
+			var item = $("<div></div>"); 
+				item.attr("id", id);
+				item.attr("class", "col-sm-3");
+			var info = $("<p></p>").html('<h3>'+product.nom + '</h3>' + product.des);
+			var img = $("<img></img>");
+			  img.attr("src", "img/"+ product.img);
+			  img.attr("class", "img-responsive");
+			  img.attr("style", "width:100%;");
+			  img.attr("alt", product.nom);
+			//var precio = $("<p></p>").html('<b>Precio: </b>' + product.sale );
+			var precio = $("<p></p>");
+			var btnComprar = $("<button></button>").html("Consultar");
+				  btnComprar.attr("class", "btnComprar");
+			  btnComprar.attr("data-index", index);
+			  btnComprar.attr("data-nombre", product.nom);
+			  btnComprar.attr("data-img", product.img);
+			btnComprar.click(function (){
+			  var index = $(this).data('index');
+			  var nombre = $(this).data('nombre');
+			  var img = $(this).data('img');
+			  window.open(urlWhatsApp + 'Deseo el producto ' + nombre + ' [ ' + window.location.pathname + 'img/' + img + ']');
+			});
+
+			item.append(info, img, precio, btnComprar, $("<br>"), $("<br>"));
+			item.appendTo('#products');	
+
+		});
+
+	</script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+	<a class="navbar-brand" href="#">Menu</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent1">
+		<ul class="navbar-nav mr-auto">
+		  	<li class="nav-item active"> 
+			  <a class="nav-link" href="#">Inicio</a> 
+			</li>
+			<li class="nav-item"> 
+				<a class="nav-link" href="#">Contacto</a> 
+			</li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container-fluid bg-3 text-center">    
+  <h3>Mi Dulce Perfecto</h3><br>
+  <input id="myInput" type="text" placeholder="Buscar..">
+  <br> <br>
+  <div id="products" class="row">
+    
+  </div>
+</div><br>
+
+<br><br>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+	<a href="https://wa.me/51956235897?text=Me%20gustaría%20contactar%20con%20ustedes." class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+	
+  
+</footer>
+
+</body>
+</html>
