@@ -41,83 +41,6 @@
 		}
 	</style>
 
-	<script type="text/javascript">
-
-		var urlJSON = 'json/tortas.json';
-		var urlWhatsApp = 'https://wa.me/51956235897?text='
-
-		$(document).ready(function () {
-			
-			loadData('');
-
-			$("#myInput").on("keyup", function() {
-				var value = $(this).val().toLowerCase();
-				$('#products').empty();
-				//console.log(value);
-				loadData(value);
-			});
-
-		});
-
-		var loadData = (function (filter){
-			$.getJSON(urlJSON).done( function(response) {
-				if(filter != '')
-				{
-					response = $.grep(response, function (element, index) {
-					    return element.tags.includes(filter);
-					});
-				}
-				response = response.sort(function (a, b) {
-    				if (a.fav < b.fav) {
-      					return 1;
-      				}
-    				if (a.fav > b.fav) {
-     					 return -1;
-     				}
-
-    				return 0;
-			   });
-				$.each(response, function(index, product) {
-					drawSection(index, product);
-				});
-		  	}).fail(function( jqxhr, textStatus, error ) {
-				    var err = textStatus + ", " + error;
-				    console.log( "Request Failed: " + err );
-			});
-		});
-
-		var drawSection = (function (index, product){
-
-			var id = "product_" + index;
-			var item = $("<div></div>"); 
-				item.attr("id", id);
-				item.attr("class", "col-sm-3");
-			var info = $("<p></p>").html('<h3>'+product.nom + '</h3>' + product.des);
-			var img = $("<img></img>");
-			  img.attr("src", "img/"+ product.img);
-			  img.attr("class", "img-responsive");
-			  img.attr("style", "width:100%;");
-			  img.attr("alt", product.nom);
-			//var precio = $("<p></p>").html('<b>Precio: </b>' + product.sale );
-			var precio = $("<p></p>");
-			var btnComprar = $("<button></button>").html("Consultar");
-				  btnComprar.attr("class", "btnComprar");
-			  btnComprar.attr("data-index", index);
-			  btnComprar.attr("data-nombre", product.nom);
-			  btnComprar.attr("data-img", product.img);
-			btnComprar.click(function (){
-			  var index = $(this).data('index');
-			  var nombre = $(this).data('nombre');
-			  var img = $(this).data('img');
-			  window.open(urlWhatsApp + 'Deseo el producto ' + nombre + ' [ ' + window.location.origin + '/public/img/' + img + ' ]');
-			});
-
-			item.append(info, img, precio, btnComprar, $("<br>"), $("<br>"));
-			item.appendTo('#products');	
-
-		});
-
-	</script>
 </head>
 <body>
 
@@ -143,7 +66,7 @@
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v7.0" nonce="EueD7X4e"></script>
 
-<div class="fb-page" data-href="https://www.facebook.com/midulceperfecto/" data-tabs="timeline,messages" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/midulceperfecto/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/midulceperfecto/">Mi Dulce Perfecto</a></blockquote></div>
+<div class="fb-page" data-href="https://www.facebook.com/midulceperfecto/" data-tabs="timeline,messages" data-width="500" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/midulceperfecto/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/midulceperfecto/">Mi Dulce Perfecto</a></blockquote></div>
 
 </div>
 
